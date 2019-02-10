@@ -13,4 +13,6 @@ GORM 中文文档
 https://learnku.com/docs/gorm/2018
 
 GO语言很好的教程
-https://www.flysnow.org/
+https://www.flysnow.org/categories/Golang/
+
+https://www.cnblogs.com/fengbohello/tag/Go%E8%AF%AD%E8%A8%80/
