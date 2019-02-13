@@ -1,0 +1,13 @@
+TimeStamp: "2019-02-13 21:58:23"
+Address: "上海"
+Postcode: 518000
+CompanyInfomation:
+  Name: "Sunny"
+  MarketCapitalization: 50000000
+  EmployeeNum: 200
+  Department:
+  - "Finance"
+  - "Design"
+  - "Program"
+  - "Sales"
+  IsOpen: false

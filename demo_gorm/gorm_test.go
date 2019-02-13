@@ -1,4 +1,4 @@
-package gorm
+package demo_gorm
 
 
 import (

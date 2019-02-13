@@ -14,8 +14,6 @@ import (
 https://blog.csdn.net/sd653159/article/details/83143760
  */
 
-
-
 type CompanyInfomation struct{
 	Name string
 	MarketCapitalization int64
@@ -37,7 +35,6 @@ func parseYaml(v *viper.Viper)  {
 	if err := v.Unmarshal(&yamlObj); err != nil {
 		fmt.Printf("err: %s", err)
 	}
-
 	fmt.Println(yamlObj)
 }
 
@@ -66,16 +63,15 @@ func readCommandLine()  {
 	*/
 }
 
-func main()  {
+var v = viper.New()
 
+func initConfig()  {
 	// 多个viper, 也可以直接使用viper.xxx
-	v := viper.New()
-
-	// 设置读取的配置文件
+	// 设置读取的配置文件 *多个配置文件时名称要有区别*
 	v.SetConfigName("linux_config")
 
 	// 添加读取的配置文件路径
-	v.AddConfigPath("./config/")
+	v.AddConfigPath("./demo_config/")
 
 	gopath := os.Getenv("GOPATH")
 	for _, p := range filepath.SplitList(gopath) {
@@ -106,20 +102,15 @@ func main()  {
 	)
 
 	fmt.Println("\n")
+}
 
-	parseYaml(v)
-	//{2018-10-18 10:09:23 Shenzhen 518000 {Sunny 50000000 200 [Finance Design Program Sales] false}}
-
-	// 读取命令行
-	 readCommandLine()
-
+func watchConfig()  {
 	/**
 	很多时候，我们服务器启动之后，如果临时想修改某些配置参数，需要重启服务器才能生效，
 	但是viper提供了监听函数，可以免重启修改配置参数，非常的实用：
 	 */
-
 	//创建一个信道等待关闭（模拟服务器环境）
-	 ctx, _ := context.WithCancel(context.Background())
+	ctx, _ := context.WithCancel(context.Background())
 
 	//cancel可以关闭信道
 	// ctx, cancel := context.WithCancel(context.Background())
@@ -129,10 +120,25 @@ func main()  {
 		//cancel()
 	})
 
-	 // 开始监听
-	 v.WatchConfig()
+	// 开始监听
+	v.WatchConfig()
 
 	//信道不会主动关闭，可以主动调用cancel关闭
 	<-ctx.Done()
+}
 
+func main()  {
+
+	// 初始化配置文件
+	initConfig()
+
+	// 配置文件序列化
+	parseYaml(v)
+	//{2018-10-18 10:09:23 Shenzhen 518000 {Sunny 50000000 200 [Finance Design Program Sales] false}}
+
+	// 读取命令行
+	readCommandLine()
+
+	// 监听配置文件
+	watchConfig()
 }

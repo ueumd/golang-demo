@@ -1,4 +1,4 @@
-package gorm
+package demo_gorm
 /**
 https://github.com/hatlonely/microservices/blob/master/internal/comment_like/comment_like.go
  */
