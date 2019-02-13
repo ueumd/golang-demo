@@ -1,0 +1,3 @@
+appName: apiserver
+port: 8080                  # HTTP绑定端口
+jwt_secret: Rtg8BPKNEf2mB4mgvKONGPZZQSaJWNLijxR42qRgq0iBb5

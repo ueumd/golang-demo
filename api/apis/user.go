@@ -29,6 +29,27 @@ func GetUser(c *gin.Context)  {
 	})
 }
 
+func GetAllUser(c *gin.Context)  {
+	var user model.User
+
+	user.Username = c.Request.FormValue("username")
+	user.Password = c.Request.FormValue("password")
+
+	result, err := user.Users()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"message":  "抱歉未找到相关信息",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": 1,
+		"data": result,
+	})
+}
+
 //添加数据
 func AddUser(c *gin.Context)  {
 	var user model.User

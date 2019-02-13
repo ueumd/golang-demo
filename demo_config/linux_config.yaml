@@ -6,8 +6,8 @@ CompanyInfomation:
   MarketCapitalization: 50000000
   EmployeeNum: 200
   Department:
-  - "Finance"
-  - "Design"
-  - "Program"
-  - "Sales"
+    - "Finance"
+    - "Design"
+    - "Program"
+    - "Sales"
   IsOpen: false
