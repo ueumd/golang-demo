@@ -58,9 +58,6 @@ func DecodeErr(err error) (int, string) {
 	case *Err:
 		return typed.Code, typed.Message
 	case *Errno:
-		fmt.Println("222222222222")
-		fmt.Printf("typed: %T \n", typed)
-		fmt.Printf("Errno: %T \n", &Errno{})
 		return typed.Code, typed.Message
 	default:
 	}
