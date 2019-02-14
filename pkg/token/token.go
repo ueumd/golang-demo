@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 )
+
 var (
 	// ErrMissingHeader means the `Authorization` header was empty.
 	ErrMissingHeader = errors.New("The length of the `Authorization` header is zero.")
@@ -15,13 +16,13 @@ var (
 
 // 载荷声明
 type CustomClaims struct {
-	Id		string	`json:":"userId`
-	Name 	string	`json:"name"`
+	Id			uint64	`json:":"id`
+	Username 	string	`json:"username"`
 	jwt.StandardClaims
 }
 
 // 创建token
-func CreateToken(ctx *gin.Context, c CustomClaims, secret string) (tokenString string, err error)  {
+func CreateToken(c CustomClaims, secret string) (tokenString string, err error)  {
 	if secret == "" {
 		secret = viper.GetString("jwt_secret")
 	}
@@ -29,17 +30,20 @@ func CreateToken(ctx *gin.Context, c CustomClaims, secret string) (tokenString s
 	// token内容
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id": 	c.Id,
-		"name":	c.Name,
+		"username":	c.Username,
 		"nbf":	time.Now().Unix(),
 		"iat":	time.Now().Unix(),
 	})
 
 	tokenString, err = token.SignedString([]byte(secret))
+
+	return tokenString, err
 }
 
 // 获取token
 func ParseRequest(c *gin.Context) (*CustomClaims, error)  {
 	authorization := c.Request.Header.Get("Authorization")
+
 	if len(authorization) == 0 {
 		return  &CustomClaims{}, ErrMissingHeader
 	}
@@ -67,7 +71,7 @@ func ParseToekn(tokenString string, secret string) (*CustomClaims, error)  {
 		return cc, nil
 	}*/
 
-	clamis, ok := token.Claims.(jwt.MapClaims)
+	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
 		return cc, errors.New("cannot convert claim to mapclaim")
 	}
@@ -77,8 +81,8 @@ func ParseToekn(tokenString string, secret string) (*CustomClaims, error)  {
 		return cc, errors.New("token is invalid")
 	}
 
-	cc.Id = clamis["id"].(string)
-	cc.Name = clamis["name"].(string)
+	cc.Id = uint64(claims["id"].(float64))
+	cc.Username = claims["username"].(string)
 
 	return cc, err
 }
@@ -87,6 +91,7 @@ func ParseToekn(tokenString string, secret string) (*CustomClaims, error)  {
 func secretFunc(secret string) jwt.Keyfunc {
 	return func(token *jwt.Token) (interface{}, error) {
 		// Make sure the `alg` is what we except.
+
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, jwt.ErrSignatureInvalid
 		}

@@ -1,18 +1,16 @@
-package models
+package model
 
 import (
 	orm "myapiserver/api/database"
 )
 
-type User struct {
-	ID       int64  `json:"id"`       // 列名为 `id`
-	Username string `json:"username"` // 列名为 `username`
-	Password string `json:"password"` // 列名为 `password`
+func (user *User) GetUser(username string) (u User, err error)  {
+	d := orm.Eloquent.Where("username = ?", username).First(&u)
+	return u, d.Error
 }
 
 // var Users []User
-
-func (user User) Insert() (id int64, err error)  {
+func (user User) Insert() (id uint64, err error)  {
 
 	//添加(创建)数据
 	result := orm.Eloquent.Create(&user)
@@ -33,7 +31,7 @@ func (user *User) Users() (users []User, err error)  {
 	return
 }
 
-func (user *User) Update(id int64) (updateUser User, err error)  {
+func (user *User) Update(id uint64) (updateUser User, err error)  {
 	if err = orm.Eloquent.Select([]string{"id", "username"}).First(&updateUser, id).Error; err != nil {
 		return
 	}
@@ -47,7 +45,7 @@ func (user *User) Update(id int64) (updateUser User, err error)  {
 	return
 }
 
-func (user *User) Destroy(id int64) (Result User, err error)  {
+func (user *User) Destroy(id uint64) (Result User, err error)  {
 	if err = orm.Eloquent.Select([]string{"id"}).First(&user, id).Error; err != nil {
 		return
 	}
