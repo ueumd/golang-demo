@@ -16,3 +16,6 @@ GO语言很好的教程
 https://www.flysnow.org/categories/Golang/
 
 https://www.cnblogs.com/fengbohello/tag/Go%E8%AF%AD%E8%A8%80/
+
+https://github.com/efkbook/blog-sample/blob/master/controller/user.go
+https://github.com/speedyproject/blog/blob/master/app/models/t_admin.go

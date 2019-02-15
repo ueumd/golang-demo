@@ -1,4 +1,4 @@
-package apis
+package handler
 
 import (
 	"github.com/gin-gonic/gin"
@@ -19,7 +19,6 @@ func Login(c *gin.Context)  {
 	}
 
 	d, err := u.GetUser(u.Username)
-
 	if err != nil {
 		SendResponse(c, errno.ErrUserNotFound, nil)
 		return

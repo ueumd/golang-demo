@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	. "myapiserver/api/apis"
+	. "myapiserver/api/handler"
 	"myapiserver/middleware"
 )
 
