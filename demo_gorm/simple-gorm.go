@@ -75,6 +75,10 @@ func testDB1()  {
 func testDB2()  {
 	db, err = gorm.Open("mysql", "root:123456@/myapiserver?charset=utf8&parseTime=True&loc=Local&timeout=10ms")
 
+	// 将实际执行的sql打印出来 true | false
+	db.LogMode(true)
+	// db.Debug().Select([]string{"id", "username", "password"}).First(&user) 打印单行
+
 	defer db.Close()
 
 	if err != nil {
@@ -84,18 +88,18 @@ func testDB2()  {
 	user := StudyUser{}
 	// 获取第一条记录，按主键排序
 	//  SELECT * FROM studyusers ORDER BY id LIMIT 1;
-	db.Select([]string{"id", "username", "password"}).First(&user)
+	db.Debug().Select([]string{"id", "username", "password"}).First(&user)
 	fmt.Println(user) //{2 update username update password}
 
 	user2 := StudyUser{}
 	// 使用主键获取记录
 	// SELECT * FROM studyusers where id = 4
-	db.Select([]string{"id", "username", "password"}).First(&user2, 4)
+	db.Debug().Select([]string{"id", "username", "password"}).First(&user2, 4)
 	fmt.Println(user2) //{4 root 123456}
 
 	// 获取所有记录
 	users := []StudyUser{}
-	db.Find(&users)
+	db.Debug().Find(&users)
 	fmt.Println(users) //[{2 update username update password} {3 root 123456} {4 root 123456} {5 root 123456} {6 root 123456} {7 root 123456}]
 
 	//https://segmentfault.com/a/1190000003036452
