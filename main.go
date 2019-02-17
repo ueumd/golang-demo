@@ -10,7 +10,7 @@ import (
 
 func main()  {
 
-	config.InitConfig()
+	config.Init()
 
 	// database init
 	orm.Init()

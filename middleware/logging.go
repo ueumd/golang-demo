@@ -37,9 +37,16 @@ func Logging() gin.HandlerFunc  {
 
 		// Read the Body content
 		if c.Request.Body != nil {
+
+			/**
+				ReadAll 读取 r 中的所有数据，返回读取的数据和遇到的错误。
+				如果读取成功，则 err 返回 nil，而不是 EOF，因为 ReadAll 定义为读取
+				所有数据，所以不会把 EOF 当做错误处理。
+			 */
 			bodyBytes, _ = ioutil.ReadAll(c.Request.Body)
 		}
 
+		// NopCloser 将 r 包装为一个 ReadCloser 类型，但 Close 方法不做任何事情。
 		c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 
 		method := c.Request.Method

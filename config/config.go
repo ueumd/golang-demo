@@ -7,11 +7,12 @@ import (
 	"github.com/lexkong/log"
 )
 
-type Config struct {
-	Name string
+func Init()  {
+	initConfig()
+	initLog()
 }
 
-func (c Config) initConfig() (e error) {
+func initConfig() (e error) {
 	viper.SetConfigName("config")
 
 	// 添加读取的配置文件路径
@@ -35,7 +36,7 @@ func (c Config) initConfig() (e error) {
 	return e
 }
 
-func (c *Config) initLog() {
+func initLog() {
 	passLagerCfg := log.PassLagerCfg{
 		Writers:        viper.GetString("log.writers"),
 		LoggerLevel:    viper.GetString("log.logger_level"),
