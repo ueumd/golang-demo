@@ -42,9 +42,9 @@ func CreateToken(c CustomClaims, secret string) (tokenString string, err error) 
 
 // 获取token
 func ParseRequest(c *gin.Context) (*CustomClaims, error)  {
-	authorization := c.Request.Header.Get("Authorization")
+	token := c.Request.Header.Get("token")
 
-	if len(authorization) == 0 {
+	if len(token) == 0 {
 		return  &CustomClaims{}, ErrMissingHeader
 	}
 
@@ -53,7 +53,7 @@ func ParseRequest(c *gin.Context) (*CustomClaims, error)  {
 	var tokenString string
 
 	//用于扫描 authorization 中的数据，并根据 format 指定的格式
-	fmt.Sscanf(authorization, "Bearer %s", &tokenString)
+	fmt.Sscanf(token, "Bearer %s", &tokenString)
 	return ParseToekn(tokenString, secret)
 }
 // 解析token

@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"myapiserver/pkg/token"
-	. "myapiserver/pkg/core"
+	. "myapiserver/pkg/result"
 	"myapiserver/pkg/errno"
 )
 
