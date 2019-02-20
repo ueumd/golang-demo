@@ -15,7 +15,7 @@ func main()  {
 		http.NotFound(w, req)
 	})
 
-	http.HandleFunc("/myform", MyForm)
+	http.HandleFunc("/form", MyForm)
 
 	log.Fatalf("%v", http.ListenAndServe("localhost:8081", nil))
 }
