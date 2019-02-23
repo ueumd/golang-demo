@@ -21,9 +21,15 @@ http://www.csyangchen.com/go-http-router.html
 当前标签: Golang包
 https://www.cnblogs.com/golove/tag/Golang%E5%8C%85/
 
-Go 中 io 包的使用方法
-https://segmentfault.com/a/1190000015591319
+
 
 bufio 库使用
 http://www.okyes.me/2016/05/30/go-bufio.html
 https://www.cnblogs.com/golove/p/3282667.html
+
+
+go示例学 good
+https://www.kancloud.cn/itfanr/go-by-example/81692
+
+常用算法
+https://www.kancloud.cn/liupengjie/go/581237
