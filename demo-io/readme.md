@@ -29,3 +29,8 @@ http://www.okyes.me/2016/05/30/go-bufio.html
 
 go 攻略
 https://segmentfault.com/blog/sxsgo
+https://segmentfault.com/blog/widuu?tag=golang
+http://targetliu.com/
+https://www.cnblogs.com/jkko123/category/991658.html
+// 中文
+https://studygolang.com/static/pkgdoc/pkg/os.htm#
