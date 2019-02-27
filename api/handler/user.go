@@ -3,11 +3,14 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"myapiserver/api/model"
-	"net/http"
-	"strconv"
-	"myapiserver/pkg/token"
+			"myapiserver/pkg/token"
 	. "myapiserver/pkg/result"
 	"myapiserver/pkg/errno"
+	"fmt"
+	"net/http"
+	"strconv"
+	"errors"
+	"log"
 )
 
 func Login(c *gin.Context)  {
@@ -18,7 +21,10 @@ func Login(c *gin.Context)  {
 		return
 	}
 
-	d, err := u.GetUser(u.Username)
+	log.Println(u.Username, u.Password)
+
+	d, err := u.GetUser(u.Username, u.Password)
+
 	if err != nil {
 		SendResponse(c, errno.ErrUserNotFound, nil)
 		return
@@ -31,6 +37,68 @@ func Login(c *gin.Context)  {
 	}
 
 	SendResponse(c, errno.OK, model.Token{Token: t})
+}
+
+func LoginBind(c *gin.Context)  {
+	var u model.User
+	if err := c.ShouldBind(&u); err != nil {
+
+	} else {
+		log.Println(u.Username)
+		log.Println(u.Password)
+		log.Println(u.ID)
+	}
+
+	list := map[string]interface{} {"username": u.Username, "password": u.Password, "id": u.ID}
+
+	SendResponse(c, errors.New("ok"), list)
+}
+
+func LoginBind2(c *gin.Context)  {
+	var u model.User
+	if err := c.Bind(&u); err != nil {
+
+	} else {
+		log.Println(u.ID, u.Username, u.Password)
+	}
+
+	list := map[string]interface{} {"username": u.Username, "password": u.Password, "id": u.ID}
+
+	SendResponse(c, errors.New("ok"), list)
+}
+
+
+/**
+表单和Body参数（Multipart/Urlencoded Form）
+典型的如 POST 提交的数据，
+multipart/form-data
+application/x-www-form-urlencoded
+格式，都可以使用 c.PostForm获取到参数
+ */
+func LoginTest(c *gin.Context)  {
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+
+	fmt.Println(username, password)
+
+	list := make(map[string]string)
+	list["username"] = username
+	list["password"] = password
+
+	SendResponse(c, errors.New("ok"), list)
+}
+
+func LoginGet(c *gin.Context)  {
+	username := c.Query("username")
+	password := c.Query("password")
+	love := c.QueryArray("love")
+
+	fmt.Println(username, password, love)
+
+	list := map[string]interface{}{"username": username, "password": password, "love": love}
+
+	SendResponse(c, errors.New("ok"), list)
+
 }
 
 //列表数据

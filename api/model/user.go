@@ -2,10 +2,12 @@ package model
 
 import (
 	orm "myapiserver/api/database"
+	"log"
 )
 
-func (user *User) GetUser(username string) (u User, err error)  {
-	d := orm.Eloquent.Where("username = ?", username).First(&u)
+func (user *User) GetUser(username, password string) (u User, err error)  {
+	log.Println("GetUser-----------", username, password)
+	d := orm.Eloquent.Where("username = ? and password = ?", username, password).First(&u)
 	return u, d.Error
 }
 

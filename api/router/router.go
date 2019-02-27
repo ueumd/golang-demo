@@ -20,6 +20,10 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine  {
 	// r := gin.Default()
 
 	g.POST("/login", Login)
+	g.POST("/do", LoginTest)
+	g.GET("/do", LoginGet)
+	g.POST("welcome", LoginBind)
+	g.POST("welcome2", LoginBind2)
 	u := g.Group("/v1")
 	u.Use(middleware.AuthMiddleware())
 	{
