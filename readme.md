@@ -19,8 +19,19 @@ https://www.flysnow.org/categories/Golang/
 https://github.com/efkbook/blog-sample/blob/master/controller/user.go
 https://github.com/speedyproject/blog/blob/master/app/models/t_admin.go
 
+编写go web框架
+https://my.oschina.net/tim8670?tab=newest&catalogId=3494522
+
 高性能 Golang Web 框架的介绍和使用
 https://www.yoytang.com/go-gin-doc.html
+
+2018-03-15 发布
+Gin实践 连载七 Golang优雅重启HTTP服务
+https://segmentfault.com/a/1190000013757098
+
+
+密码学简介与Golang的加密库Crypto的使用
+https://blog.yumaojun.net/2017/02/19/go-crypto/
 
 ```
 单个参数各种方法
