@@ -10,7 +10,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"myapiserver/enciphertex"
+	"myapiserver/utils/encipher/cryptex"
 )
 
 func main() {

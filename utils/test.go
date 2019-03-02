@@ -7,6 +7,7 @@ import (
 )
 
 func main()  {
+
 	token, _ := cryptex.Cryptex.Encode("abcd")
 	log.Println(token)
 	fmt.Println(token)

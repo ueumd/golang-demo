@@ -12,8 +12,7 @@ package cryptex
 import "myapiserver/utils/encipher"
 
 // key 硬编码在代码中的对称密钥，用来加密配置参数
-var key = []byte("sdkahdsksahdktquZrwza8Kp2A")
-
+var key = []byte("dFR0kah3zgfd2dsksNay7DhdCk")
 // Cryptex 用来加解密配置
 var Cryptex encipher.Cipher
 
