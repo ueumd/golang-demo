@@ -57,3 +57,6 @@ c.ShouldBindXML
 c.ShouldBindQuery
 c.ShouldBindYAML
 ````
+
+https://casbin.org/docs/zh-CN/tutorials
+https://github.com/taigacute/leaseapp

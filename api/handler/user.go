@@ -116,10 +116,12 @@ func GetUser(c *gin.Context)  {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": 1,
-		"data": result,
-	})
+	//c.JSON(http.StatusOK, gin.H{
+	//	"code": 1,
+	//	"data": result,
+	//})
+	list := map[string]interface{} {"list": result}
+	SendResponse(c, errors.New("ok"), list)
 }
 
 func GetAllUser(c *gin.Context)  {

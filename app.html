@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<button type="button" onclick="formGet()">FORM请求</button>
+<button type="button" onclick="jsonGet()">JSON请求</button>
+<button type="button" onclick="getUser()">getUser</button>
+
+<script>
+  let token = ''
+  function formGet() {
+    $.ajax({
+      type: "GET",
+      url: 'http://127.0.0.1:8000/do',
+      data: {
+        "username":"admin",
+        "password":"admin"
+      }
+    }).done(res => {
+      console.log(res)
+    }).fail(err => {
+      console.log(err)
+    }).always(() => {
+      console.log(1111111)
+    })
+  }
+
+  function jsonGet() {
+    let d = {
+      "username":"admin",
+      "password":"admin"
+    }
+    $.ajax({
+      type: "POST",
+      url: 'http://127.0.0.1:8000/login',
+      traditional :true,
+      // contentType: "application/json",
+      // data: JSON.stringify(data),
+      data: JSON.stringify(d),
+    }).done(res => {
+      token = res.data.token
+      console.log(res)
+    }).fail(err => {
+      console.log(err)
+    }).always(() => {
+      console.log(1111111)
+    })
+  }
+
+  function getUser() {
+    $.ajax({
+      type: "GET",
+      url: 'http://127.0.0.1:8000/v1/getUser',
+      headers: {
+        'token': 'Bearer ' + token,
+      },
+      traditional :true
+    }).done(res => {
+      console.log(res)
+    }).fail(err => {
+      console.log(err)
+    }).always(() => {
+      console.log(1111111)
+    })
+  }
+
+
+</script>
+</body>
+</html>

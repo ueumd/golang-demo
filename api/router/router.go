@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	. "myapiserver/api/handler"
 	"myapiserver/middleware"
@@ -8,6 +9,12 @@ import (
 )
 
 func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine  {
+	cf := cors.DefaultConfig()  //新建cors配置
+	cf.AllowAllOrigins = true   //允许跨域
+	cf.AddAllowHeaders("token")
+
+
+	g.Use(cors.New(cf))    //使用use方法让gin接受cors生成的配置
 
 	g.Use(mw...)
 	
