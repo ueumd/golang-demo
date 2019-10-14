@@ -1,16 +1,16 @@
 package handler
 
 import (
-	"github.com/gin-gonic/gin"
-	"myapiserver/api/model"
-			"myapiserver/pkg/token"
-	. "myapiserver/pkg/result"
-	"myapiserver/pkg/errno"
+	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"log"
+	"myapiserver/api/model"
+	"myapiserver/pkg/errno"
+	. "myapiserver/pkg/result"
+	"myapiserver/pkg/token"
 	"net/http"
 	"strconv"
-	"errors"
-	"log"
 )
 
 func Login(c *gin.Context)  {

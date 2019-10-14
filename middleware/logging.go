@@ -1,16 +1,16 @@
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
 	"bytes"
-	"time"
-	"regexp"
-	"io/ioutil"
 	"encoding/json"
+	"github.com/gin-gonic/gin"
 	"github.com/lexkong/log"
 	"github.com/willf/pad"
-	"myapiserver/pkg/result"
+	"io/ioutil"
 	"myapiserver/pkg/errno"
+	"myapiserver/pkg/result"
+	"regexp"
+	"time"
 )
 
 type bodyLogWriter struct {
